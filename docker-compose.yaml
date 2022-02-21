@@ -1,0 +1,80 @@
+version: '3'
+networks:
+  appnet:
+    driver: bridge
+
+services:
+  # servico1:
+  #   restart: always
+  #   build:
+  #     dockerfile: ./servico1/servico1.dockerfile
+  #     context: .
+  #   image: servico1
+  #   container_name: servico1
+  #   volumes:
+  #     - "./servico1:/servico1"
+  #     - "node_modules:/servico1/node_modules"
+  #   environment:
+  #     - PORT=3000
+  #     # - SITE="appmaster:3000"
+  #   # ports:
+  #   #   - "3000:3000"
+  #   depends_on:
+  #     - bdservico1
+  #   networks:
+  #     - appnet
+
+  bdservico1:
+    restart: always
+    image: bdservico1
+    container_name: bdservico1
+    build:
+      dockerfile: ./bd.dockerfile
+      context: .
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    networks:
+      - appnet
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+      - ./db/backup/files/:/data_backup/data
+  bdservico2:
+    restart: always
+    image: bdservico2
+    container_name: bdservico2
+    build:
+      dockerfile: ./bd.dockerfile
+      context: .
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    networks:
+      - appnet
+    volumes:
+      - db-config2:/etc/mysql
+      - db-data2:/var/lib/mysql
+      - ./db2/backup/files/:/data_backup/data
+
+  rabbitmq:
+    image: "rabbitmq:3.8-management-alpine"
+    container_name: nodejs-rabbitmq-rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - "./.rabbitmq_data:/var/lib/rabbitmq/mnesia"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+  
+volumes:
+  node_modules:
+  db-config:
+  db-data:
+  db-config2:
+  db-data2:
