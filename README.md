@@ -1,6 +1,6 @@
 # Testing NodeJS with RabbitMQ
 
-This code is a test using 2 microservices using [RabbitMQ](https://www.rabbitmq.com/), [NodeJS](https://nodejs.org/en/), [Express](https://expressjs.com/), [MySQL](https://www.mysql.com/) and [Prisma](https://www.prisma.io/).
+This code is a test using 2 microservices using [RabbitMQ](https://www.rabbitmq.com/), [NodeJS](https://nodejs.org/en/), [Express](https://expressjs.com/), [MySQL](https://www.mysql.com/), [Prisma](https://www.prisma.io/), [JWT](https://jwt.io/).
 
 ---
 ## Requirements
@@ -50,6 +50,16 @@ The service1 has one Post Request at http://localhost:3000/newproduct and the bo
 If using Postman, just import the file `Node_with_RabbitMQ.postman_collection.json`
 
 In this example, service1 will add at his DB the product without quantity and will send through RabbitMQ to service2 the quantity and the ID. Service2 will add to his DB and send a response through RabbitMQ. This is the RPC method.
+
+To create a new user, use the route http://localhost:3000/newuser and the body:
+```json
+{
+    "email" : "jorge@jorge.com",
+    "password": "12345"
+}
+```
+Make login in http://localhost:3000/login with the same body ahead. The response will have the JWT token. Use it in Authorization, Bearer Token.
+
 
 ---
 
