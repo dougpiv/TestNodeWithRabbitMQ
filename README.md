@@ -20,7 +20,7 @@ Enter the service1 and service2 folders and run in each one:
 
 ```bash 
 npm install
-npx prisma migrate
+npx prisma migrate dev
 ```
 `npx prisma migrate` This command will create the database for each microservice.
 
@@ -47,6 +47,8 @@ The service1 has one Post Request at http://localhost:3000/newproduct and the bo
 	"quantity": 3
 }
 ```
+If using Postman, just import the file `Node_with_RabbitMQ.postman_collection.json`
+
 In this example, service1 will add at his DB the product without quantity and will send through RabbitMQ to service2 the quantity and the ID. Service2 will add to his DB and send a response through RabbitMQ. This is the RPC method.
 
 ---
