@@ -1,6 +1,6 @@
 # Testing NodeJS with RabbitMQ
 
-This code is a test using 2 microservices using [RabbitMQ]([https://link](https://www.rabbitmq.com/)), [NodeJS](https://nodejs.org/en/), [Express](https://expressjs.com/), [MySQL](https://www.mysql.com/) and [Prisma](https://www.prisma.io/).
+This code is a test using 2 microservices using [RabbitMQ](https://www.rabbitmq.com/), [NodeJS](https://nodejs.org/en/), [Express](https://expressjs.com/), [MySQL](https://www.mysql.com/) and [Prisma](https://www.prisma.io/).
 
 ---
 ## Requirements
