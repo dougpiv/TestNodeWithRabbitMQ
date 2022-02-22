@@ -9,7 +9,7 @@ datasource db {
 
 model Product {
   id         String   @id @default(uuid())
-  idservico1 String
+  idservico1 String   @unique
   quantity   Int      @default(0)
   created_at DateTime @default(now())
 
